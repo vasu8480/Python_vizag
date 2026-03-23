@@ -1,226 +1,261 @@
-'''
+# ---------------- Armstrong Number ----------------
 num = 153
-sum = 0
-o=len(str(num))
-temp = num
-while temp > 0:
-   digit = temp % 10
-   sum += digit ** o
-   temp //= 10
-if num == sum:
-   print(num,"is an Armstrong number")
-else:
-   print(num,"is not an Armstrong number")
+sum_val = 0
 
-#if else elif example
-def find_max(a,b,c):
-    if a>b and a>c:
+o = len(str(num))   # number of digits
+temp = num
+
+while temp > 0:
+    digit = temp % 10
+    sum_val += digit ** o   # power of digits
+    temp //= 10
+
+if num == sum_val:
+    print(num, "is an Armstrong number")
+else:
+    print(num, "is not an Armstrong number")
+
+
+# ---------------- Max of Three ----------------
+def find_max(a, b, c):
+    if a > b and a > c:
         return a
-    elif b>a and b>c:
+    elif b > a and b > c:
         return b
     else:
         return c
-print(find_max(10,20,30))
 
-##leap year
+print(find_max(10, 20, 30))
+
+
+# ---------------- Leap Year ----------------
 def leap_year(year):
+    # divisible by 4 and not by 100 OR divisible by 400
     if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
         return True
     else:
         return False
+
 print(leap_year(2000))
 
-#factors of a number
+
+# ---------------- Factors of a Number ----------------
 def factors(n):
-    for i in range(1,n+1):
-        if n%i==0:
+    for i in range(1, n+1):
+        if n % i == 0:
             print(i)
+
 factors(10)
 
-# #power of without using power function
-a,b=2,3
-power=b
-res=1
-for b in range(b,0,-1):
-    res=res*a
+
+# ---------------- Power without built-in ----------------
+a, b = 2, 3
+
+res = 1
+for i in range(b):
+    res *= a
+
 print(res)
 
-while b!=0:
-    res=res*a
-    b-=1
-print(res)
 
-def power(a,b):
-    if b==0:
+# recursive power
+def power(a, b):
+    if b == 0:
         return 1
     else:
-        return a*power(a,b-1)
-print(power(2,3))
+        return a * power(a, b-1)
+
+print(power(2, 3))
 
 
+# ---------------- Tuple Index ----------------
+a = (1,2,3,4,5,6,4,78)
+print(a.index(4))   # first occurrence
 
-a=(1,2,3,4,5,6,4,78)
-print(a.index(4))
 
-#len of string without using len function
-a="vasu"
-count=0
+# ---------------- Length without len() ----------------
+a = "vasu"
+count = 0
+
 for i in a:
-    count+=1
+    count += 1
+
 print(count)
 
-#len of list without using len function
-count=0
+
+# list length (fix: define b)
+b = [1,2,3,4,5]
+count = 0
+
 for i in b:
-    count+=1
+    count += 1
+
 print(count)
 
 
+# ---------------- Max without max() ----------------
+max_val = b[0]
 
-# #max of list without using max function
-max=0
 for i in b:
-    if i>max:
-        max=i
-print(max)
+    if i > max_val:
+        max_val = i
 
-# #min of list without using min function
-min=0
+print(max_val)
+
+
+# ---------------- Min without min() ----------------
+min_val = b[0]
+
 for i in b:
-    if i<min:
-        min=i
-print(min)
+    if i < min_val:
+        min_val = i
+
+print(min_val)
 
 
-# #reverse of string without using reverse function
-rev=""
+# ---------------- Reverse String ----------------
+a = "vasu"
+rev = ""
+
 for i in a:
-    rev=i+rev
+    rev = i + rev
+
 print(rev)
 
-# #reverse of list without using reverse function
-rev=[]
+
+# ---------------- Reverse List ----------------
+b = [1,2,3,4]
+rev = []
+
 for i in b:
-    rev.insert(0,i)
+    rev.insert(0, i)
+
 print(rev)
 
 
-# c=(1,2,3,4,5,6,4,78)
-#reverse of tuple without using reverse function
-rev=()
+# ---------------- Reverse Tuple ----------------
+c = (1,2,3,4,5,6,4,78)
+rev = ()
+
 for i in c:
-    rev=(i,)+rev
+    rev = (i,) + rev
+
 print(rev)
 
 
-#enumerate is used to iterate over a list and get the index and value of each item in the list
-# 0 v
-# 1 a
-# 2 s
-# 3 u
-a="vasu"
+# ---------------- Enumerate ----------------
+a = "vasu"
+
 for i in enumerate(a):
-    print(i)
-for i,k in enumerate(a):
-    print(i,k)
+    print(i)   # (index, value)
 
-# 0 5
-# 1 8
-# 2 42
-# 3 698
-# 4 4
-b=[5,8,42,698,4]
-for i,k in enumerate(b):
-    print(i,k)
+for i, k in enumerate(a):
+    print(i, k)
 
 
+b = [5,8,42,698,4]
+
+for i, k in enumerate(b):
+    print(i, k)
+
+
+# ---------------- Lambda / Map / Filter / Reduce ----------------
 from functools import reduce
-#lambda
-f = lambda x: x*x
-print(f(5)) # 25
 
-#map is used to apply a function to each item in a list
-def square(x):
-    return x*x
-print(list(map(square, [1,2,3,4,5]))) # [1, 4, 9, 16, 25]
-print(list(map(lambda x:x*x, [1,2,3,4,5]))) # [1, 4, 9, 16, 25]
-
-#filter is used to filter out the elements from a list based on a condition
-def is_odd(x):
-    return x%2 == 1
-print(list(filter(lambda x:x%2, [1,2,3,4,5]))) # [1, 3, 5]
-
-#reduce is used to apply a function to a list and reduce it to a single value
-def add(x,y):
-    return x+y
-print(reduce(lambda x,y:x+y, l)) 
-print(reduce(add, [1,2,3,4,5])) # 15
-print(reduce(add, [1,2,3,4,5], 10)) # 25
+# lambda
+f = lambda x: x * x
+print(f(5))
 
 
-#sorted
-print(sorted([1,2,3,4,5], reverse=True)) # [5, 4, 3, 2, 1]
-print(sorted([1, 2, 3, 4, 5], key=lambda x: x % 2)) #[2, 4, 1, 3, 5]
-print(sorted([1, 2, 3, 4, 5], key=lambda x: x % 2, reverse=True))  #[1, 3, 5, 2, 4]
-
-#sorted
-print(sorted(["abc","adb", 'Zoo', 'Credit'], key=str.lower)) # ['abc', 'adb', 'Credit', 'Zoo']
-#everse 
-print(sorted(["adc","acb", 'Zoo', 'Credit'], key=str.lower, reverse=True)) # ['Zoo', 'Credit', 'adc', 'acb']
+# map
+print(list(map(lambda x: x*x, [1,2,3,4,5])))
 
 
+# filter
+print(list(filter(lambda x: x % 2, [1,2,3,4,5])))
 
-l=[1,2,3]
-l2=[6,7,8,9,10]
-#multiply 
-print(list(map(lambda x,y:x*y,l,l2)))  # [6, 14, 24]
 
-#odd numbers
-print(list(filter(lambda x:x%2==1,l))) # [1, 3]
+# reduce
+print(reduce(lambda x, y: x + y, [1,2,3,4,5]))
+print(reduce(lambda x, y: x + y, [1,2,3,4,5], 10))
 
-#multiply every value by 2
-print(list(map(lambda x:x*2,l))) # [2, 4, 6]
 
-#multiply every value by 2
-print([i*2 for i in l]) # [2, 4, 6]
+# ---------------- Sorted ----------------
+print(sorted([1,2,3,4,5], reverse=True))
 
-#multiplication of all values in a list
-print(reduce(lambda x,y:x*y,l)) # 6
+# even first, odd later
+print(sorted([1,2,3,4,5], key=lambda x: x % 2))
 
-#mutiplied by all numbers and again multiplied by 2
-print(reduce(lambda x,y:x*y,l,2)) # 12
+print(sorted([1,2,3,4,5], key=lambda x: x % 2, reverse=True))
 
-#sum of all numbers
-print(reduce(lambda x,y:x+y,l)) # 6
 
-#sum of all numbers with first number
-print(reduce(lambda x,y:x+y,l,2)) # 8
+# string sorting (case insensitive)
+print(sorted(["abc","adb",'Zoo','Credit'], key=str.lower))
 
-#regular expression
+print(sorted(["adc","acb",'Zoo','Credit'], key=str.lower, reverse=True))
+
+
+# ---------------- List Operations ----------------
+l = [1,2,3]
+l2 = [6,7,8,9,10]
+
+# multiply two lists (pairwise)
+print(list(map(lambda x, y: x*y, l, l2)))  # stops at shortest list
+
+
+# odd numbers
+print(list(filter(lambda x: x % 2 == 1, l)))
+
+
+# multiply each element by 2
+print(list(map(lambda x: x*2, l)))
+print([i*2 for i in l])   # list comprehension
+
+
+# multiplication of all elements
+print(reduce(lambda x, y: x*y, l))
+
+# with initial value
+print(reduce(lambda x, y: x*y, l, 2))
+
+
+# sum
+print(reduce(lambda x, y: x+y, l))
+print(reduce(lambda x, y: x+y, l, 2))
+
+
+# ---------------- Regular Expressions ----------------
 import re
+
 s = '123ab8c456def789ghi'
-#findall()
-print (re.findall('\d+',s)) # ['123', '8', '456', '789']
 
-#finditer()
-for i in re.finditer('\d+',s): # 123 8 456 789
-    print( i.group())
+# find all numbers
+print(re.findall(r'\d+', s))
 
-#search()
-m = re.search('\d+',s) # 123
-print (m.group()) 
 
-#match()
-n = re.match('\d+',s) # 123
-print (n.group())
+# iterator
+for i in re.finditer(r'\d+', s):
+    print(i.group())
 
-#split()
-print (re.split('\d+',s)) # ['', 'ab', 'c', 'def', 'ghi']
 
-#sub()
-print (re.sub('\d+','*',s)) # *ab*c*def*ghi
+# first match anywhere
+m = re.search(r'\d+', s)
+print(m.group())
 
-#compile()
-p = re.compile('\d+') # 123 8 456 789
-print (p.findall(s))
-'''
+
+# match from start only
+n = re.match(r'\d+', s)
+print(n.group())
+
+
+# split by numbers
+print(re.split(r'\d+', s))
+
+
+# replace numbers with *
+print(re.sub(r'\d+', '*', s))
+
+
+# compiled pattern (reuse)
+p = re.compile(r'\d+')
+print(p.findall(s))
