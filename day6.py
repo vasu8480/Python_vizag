@@ -1,146 +1,200 @@
-'''
-l=[1,2,3,4]
-a=[]
+# ---------------- Conditional Append ----------------
+l = [1,2,3,4]
+a = []
+
 for i in range(len(l)):
-    msg= a.append(l[i]*2) if i%2==0 else 0
-print(a) # [2, 6]
-#question  else ----> a.append(l[i])
+    # if index is even → append value*2, else do nothing
+    msg = a.append(l[i]*2) if i % 2 == 0 else 0
 
-l1=[1,2,3,4]
-print([i*2 for i in l1 if i%2==0]) # [4, 8]
+print(a)  # [2, 6]
 
-l2=[5,6,7,8]
-print({i*2 for i in l2 if i%2==0}) # {16,12}
-print({i:i*2 for i in l2 if i%2==0}) # {6: 12, 8: 16}
+# NOTE: Better version (add else case)
+# a.append(l[i]) if i%2==0 else a.append(l[i])
 
 
-char=['a','b','c','d','e',"a","f","b"]
-dup=[]
+# ---------------- List / Set / Dict Comprehension ----------------
+l1 = [1,2,3,4]
+print([i*2 for i in l1 if i % 2 == 0])  # [4, 8]
+
+l2 = [5,6,7,8]
+print({i*2 for i in l2 if i % 2 == 0})     # {12,16} (set)
+print({i: i*2 for i in l2 if i % 2 == 0})  # {6:12, 8:16} (dict)
+
+
+# ---------------- Find Duplicates ----------------
+char = ['a','b','c','d','e','a','f','b']
+dup = []
+
 for i in char:
-    if char.count(i)>1:
+    if char.count(i) > 1:
         dup.append(i)
-print(dup) # ['a', 'b', 'a', 'b']
 
-char=['a','b','c','d','e',"a","f","b"]
-dup=[]
+print(dup)  # duplicates (repeated)
+
+
+# remove duplicate entries in result
+dup = []
 for i in char:
-    if char.count(i)>1:
+    if char.count(i) > 1:
         if i not in dup:
             dup.append(i)
-print(dup) # ['a', 'b']
 
-max even number
-l=[1,2,3,4,5,6,7,8,9,10]
-print(max([i for i in l if i%2==0])) # 10
+print(dup)  # ['a','b']
+
+
+# ---------------- Max Even Number ----------------
+l = [1,2,3,4,5,6,7,8,9,10]
+
+print(max([i for i in l if i % 2 == 0]))  # 10
+
+
 def max_even(l):
-    ma=[]
+    ma = []
     for i in l:
-        if i%2==0:
+        if i % 2 == 0:
             ma.append(i)
     return max(ma)
-print(max_even(l)) # 10
 
+print(max_even(l))
+
+
+# ---------------- Factorial (Recursion) ----------------
 def fact(n):
-    if n==0:
+    if n == 0:
         return 1
     else:
-        return n*fact(n-1)
-print(fact(5)) # 120
+        return n * fact(n-1)
 
-prime number
+print(fact(5))  # 120
+
+
+# ---------------- Prime Number ----------------
 def prime(n):
-    for i in range(2,int(n/2)+1):
-        if n%i==0:
+    for i in range(2, int(n/2) + 1):
+        if n % i == 0:
             return False
     return True
-print(prime(8)) # True
 
-prime 
-n=1
-if n>1:
-		for i in range(2,n):
-				if n%i==0:
-						print("not prime")
-						break
-		else:
-				print("prime")
+print(prime(8))  # False (NOTE: your comment was wrong earlier)
+
+
+# Another method
+n = 1
+
+if n > 1:
+    for i in range(2, n):
+        if n % i == 0:
+            print("not prime")
+            break
+    else:
+        print("prime")
 else:
-		print("not prime")
-Prime interval
+    print("not prime")
 
-def prime(a,b):
-    for i in range(a+1,b):
-        if i>1:
-            for j in range(2,i):
-                if i%j==0:
+
+# ---------------- Prime in Interval ----------------
+def prime_range(a, b):
+    for i in range(a+1, b):
+        if i > 1:
+            for j in range(2, i):
+                if i % j == 0:
                     break
             else:
                 print(i)
-prime(1,113)
 
-dic={
-    'a':6,
-    'b':2
+prime_range(1, 113)
+
+
+# ---------------- Dictionaries ----------------
+dic = {
+    'a': 6,
+    'b': 2
 }
 print(dic)
-print(dic['a'])
+print(dic['a'])   # access value
 
-dic={
-    '123':6,
-    'b':2
-}
-print(dic)
 
-dic={
-    '123':[1,2,3],
-    'b':"hello",
-}
-print(dic)
-dic={
-    "123":(1,2,3),
-    "123":'hello',
-   # [100,200,300]:'hello' # TypeError: unhashable type: 'list'
+# keys can be strings, numbers, tuples (immutable)
+dic = {
+    '123': [1,2,3],
+    'b': "hello"
 }
 print(dic)
 
-user={
-    'name':'vasu',
-    'age':24
+
+# duplicate keys → last one overrides
+dic = {
+    "123": (1,2,3),
+    "123": 'hello'
 }
-print(user) # {'name': 'vasu', 'age': 24}
-print(user.get('name')) # vasu
-print('vasu' in user) # False
-print('name' in user)   # True
-print(user.values()) # dict_values(['vasu', 24])
-print('vasu' in user.values()) # True  
-print(user.items()) # dict_items([('name', 'vasu'), ('age', 24)])
-
-user2=user.copy()
-print(user2) # {'name': 'vasu', 'age': 24}
-print(user.clear())
-print(user) # {}
-print(user2) # {'name': 'vasu', 'age': 24}
-
-print(user.pop('name')) # vasu
-print(user) # {'age': 24}
-
-print(user.popitem())  # randomly removes one item
+print(dic)   # only last value kept
 
 
-user={
-    'name':'vasu',
-    'age':24,
-    "city":"vizag"
+# ---------------- Dictionary Methods ----------------
+user = {
+    'name': 'vasu',
+    'age': 24
 }
+
+print(user)
+print(user.get('name'))  # safe access
+
+print('vasu' in user)    # False (checks keys only)
+print('name' in user)    # True
+
+print(user.values())     # values
+print('vasu' in user.values())  # True
+
+print(user.items())      # key-value pairs
+
+
+# ---------------- Copy vs Clear ----------------
+user2 = user.copy()   # copy
+
+print(user2)
+
+print(user.clear())   # clears original
+print(user)           # {}
+print(user2)          # still has data
+
+
+# ---------------- Pop Operations ----------------
+# NOTE: user is empty now → below will error if used
+
+# print(user.pop('name')) → KeyError if key not present
+# print(user.popitem()) → removes last inserted item
+
+
+# ---------------- Loop Through Dictionary ----------------
+user = {
+    'name': 'vasu',
+    'age': 24,
+    'city': 'vizag'
+}
+
 for i in user:
-    print(i) # name age city
-for i in user.values():
-    print(i) # vasu 24 vizag
-for i in user.keys():
-    print(i) # name age city
-for k,v in user.items():
-    print(k,v) # name vasu age 24 city vizag
-'''
+    print(i)   # keys
 
-#prime number
-n=1
+for i in user.values():
+    print(i)   # values
+
+for i in user.keys():
+    print(i)   # keys
+
+for k, v in user.items():
+    print(k, v)   # key-value pairs
+
+
+# ---------------- Prime Check (final snippet) ----------------
+n = 1
+
+# 1 is not prime
+if n > 1:
+    for i in range(2, n):
+        if n % i == 0:
+            print("not prime")
+            break
+    else:
+        print("prime")
+else:
+    print("not prime")
